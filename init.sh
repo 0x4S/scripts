@@ -39,11 +39,22 @@ function build_tree() {
 		fi
 	fi
 
+    # Ask for the platform name
+    echo -e "${WHITE_B}"
+    read -p "Enter the platform name (e.g., HackTheBox, TryHackMe): " PLATFORM_NAME
+
+    # Check and create platform directory
+    platform_dir=$project_root/$PLATFORM_NAME
+    if [ ! -d $platform_dir ]; then
+        echo -e "${GREEN_B} - creating directory for platform \"$PLATFORM_NAME\" in \"$project_root\"${RESET}"
+        mkdir $platform_dir
+    else
+        echo -e "${CYAN_B}Platform directory \"$PLATFORM_NAME\" already exists in \"$project_root\"${RESET}"
+    fi
 
 	# This section creates the root directory of the current box
 
-
-	box_home=$project_root/$1/
+	box_home=$platform_dir/$1/
 
 	#########################################################################
 	                                                                        #
@@ -59,7 +70,7 @@ function build_tree() {
 
 	if [ ! -d $box_home ]; then
 
-		echo -e "\n${GREEN_B} - creating directory \"$1\" in \"$project_root\""
+		echo -e "\n${GREEN_B} - creating directory \"$1\" in \"$platform_dir\""
 		mkdir $box_home
 
 		for i in ${directory_list[@]}; do
@@ -80,7 +91,7 @@ function build_tree() {
 
 	else
 		echo
-		echo -e "${RED_B}ERROR: ${WHITE_B}directory \"$1\" already exists in \"$project_root\"! \n${CYAN_B}Skipping.\n${RESET}"
+		echo -e "${RED_B}ERROR: ${WHITE_B}directory \"$1\" already exists in \"$platform_dir\"! \n${CYAN_B}Skipping.\n${RESET}"
 	fi
 }
 
@@ -115,7 +126,7 @@ function start_nmap(){
 
 	echo -e "${CYAN_B}\nDone and opening sublime.${RESET}"
 
-	sudo subl .
+	sudo subl $box_home
 }
 
 function is_valid_ip() {
