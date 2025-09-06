@@ -357,3 +357,4 @@ do {
     Show-Menu
     $choice = Read-Host "Select an option (1-16)"
     Run-Query $choice
+} while ($true)
